@@ -53,6 +53,7 @@ export default function MedicationDetail() {
       <div className="detail-field">
         <span className="label">Dosis:</span>
         <span className="value">{medication.dose}</span>
+       
       </div>
 
       <div className="detail-field">
