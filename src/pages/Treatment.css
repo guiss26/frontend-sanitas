@@ -13,7 +13,6 @@
     padding: 12px 16px;
     background-color: #fff;
     background-color: 8px;
-    /* border-radius: 4px; */
     border-bottom: 1px solid;
 }
 
@@ -23,13 +22,6 @@
     align-items: center;
     gap: 12px;
 }
-
-/* .colorIndicatorStyle {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    background-color: ;
-} */
 
 .medication-info-style {
     flex: 1;
@@ -75,7 +67,7 @@
 /*Componente para cada sección (Por tomar / Tomada)*/ 
 /* .sectionStyle{} */
 .header-style {
-    background-color: #5dade2;
+    background-color: #056395b1;
     color: white;
     padding: 12px 16px;
     margin: 0;
@@ -83,13 +75,8 @@
     font-weight: 600;
 }
 
-/* .content-style {
-    background-color: ;
-} */
-
 .empty-style {
     text-align: center;
-    /* color: #fff; */
     font-size: 14px;
     font-style: italic;
 }
