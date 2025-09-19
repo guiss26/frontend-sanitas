@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import MedicationItem from './MedicationItem';
-import { Link } from 'react-router-dom'
+import { getAllMedications } from '../services/MedicationsServices';
 import './MedicationList.css'
 
 const MedicationList = () => {
@@ -8,56 +8,30 @@ const MedicationList = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    // const MedicationItem = ({ medication }) => {
-    //     return (
-    //         <div className="medication-item">
-    //             <Link to={`/medication-detail/${medication.id}`} state={{ medication }}>
-    //                 {medication.name}
-    //             </Link>
-    //         </div>
-    //     );
-    // };
-
     const fetchMedications = async () => {
         try {
             setLoading(true)
             setError(null)
-            // Simular llamada a API
-            // const response = await fetch('/api/medications');
-            // const data = await response.json();
-            // Datos de ejemplo - reemplaza con tu llamada real
-            const mockData = [
-                {
-                    id: 1,
-                    name: "Ibuprofeno",
-                    dosage: "400mg",
-                    frequency: "Cada 8 horas",
-                    type: "eventual",
-                    notes: "Tomar con comida"
-                },
-                {
-                    id: 2,
-                    name: "Metformina",
-                    dosage: "500mg",
-                    frequency: "2 veces al día",
-                    type: "cronico",
-                    notes: "Para diabetes"
-                },
-                {
-                    id: 3,
-                    name: "Amoxicilina",
-                    dosage: "250mg",
-                    frequency: "Cada 12 horas",
-                    type: "reciente",
-                    notes: "Tratamiento por 7 días"
-                }
-            ];
 
-            //Simular delay de red
-            setTimeout(() => {
-                setMedications(mockData)
-                setLoading(false)
-            }, 1000)
+            // Use the real API service
+            const data = await getAllMedications();
+
+            // Transform backend data to frontend format
+            const transformedData = data.map(med => ({
+                id: med.id,
+                name: med.name,
+                dosage: med.dose,
+                frequency: med.frequencyDisplay,
+                type: 'eventual', // You might want to add type field to backend
+                notes: `Hora: ${med.timeToTake}`,
+                dose: med.dose,
+                time: med.timeToTake,
+                startDate: new Date().toISOString().split('T')[0], // Default to today
+                endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] // Default to 7 days
+            }));
+
+            setMedications(transformedData);
+            setLoading(false);
 
         } catch (err) {
             console.log('Error al cargar los medicamentos', err)
@@ -70,12 +44,9 @@ const MedicationList = () => {
         fetchMedications()
     }, [])
 
-    //const listStyle
-    //const emptyStateStyle
-
     if (loading) {
         return (
-            <div className="emptyStateStyle">
+            <div className="empty-state-style">
                 <p>Cargando medicamentos...</p>
             </div>
         )
@@ -83,7 +54,7 @@ const MedicationList = () => {
 
     if (error) {
         return (
-            <div className="errorStyle">
+            <div className="error-style">
                 <p className='paragraph'>{error}</p>
                 <button onClick={fetchMedications} className='button-retry'>Reintentar</button>
             </div>
@@ -93,7 +64,7 @@ const MedicationList = () => {
     //estado vacío
     if (medications.length === 0) {
         return (
-            <div className="emptyStateStyle">
+            <div className="empty-state-style">
                 <p>No hay medicamentos registrados</p>
                 <button onClick={fetchMedications} className='button-update'>Actualizar</button>
             </div>
@@ -102,7 +73,7 @@ const MedicationList = () => {
 
     //lista de medicamentos 
     return (
-        <div className="listStyle">
+        <div className="list-style">
             {medications.map(medication => (
                 <MedicationItem key={medication.id} medication={medication}></MedicationItem>
             ))}

@@ -1,10 +1,10 @@
-.emptyStateStyle {
+.empty-state-style {
     text-align: center;
     padding: 40px 20px;
     color: #666;
 }
 
-.errorStyle {
+.error-style {
     color: #e74c3c;
 }
 
@@ -13,7 +13,7 @@
     padding: 10px;
 } */
 
-.listStyle {
+.list-style {
     padding: 0;
     margin: 0;
 }
