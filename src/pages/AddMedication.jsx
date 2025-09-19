@@ -31,7 +31,7 @@ const AddMedication = () => {
                     <MedicationForm onSubmit={handleAddMedication} buttonLabel="Guardar" />
                 </div>
             </div>
-            <ResetButton></ResetButton>
+            {/* <ResetButton></ResetButton> */}
         </>
     )
 }
