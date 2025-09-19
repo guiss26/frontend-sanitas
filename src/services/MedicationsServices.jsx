@@ -1,13 +1,15 @@
 // Servicio para obtener información de las creadoras desde la API local
 
+const URL_API_MEDICATION = "http://localhost:8080/api/medications";
+const URL_API_REMINDER = "http://localhost:8080/api/reminders"
+
 import Swal from 'sweetalert2';
 
-// const URL_API = "http://localhost:3000/cambiar-nombre";
 
 
 
 // TODO: Actualizar estas URLs cuando el backend esté listo
-const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+// const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 const ENDPOINTS = {
   medications: `${API_BASE_URL}/medications`,
   // Si el backend usa rutas diferentes, actualizar aquí:
